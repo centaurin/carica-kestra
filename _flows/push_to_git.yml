@@ -4,7 +4,7 @@ namespace: prod
 tasks:
   - id: commit_and_push
     type: io.kestra.plugin.git.PushFlows
-    url: https://github.com/centaurin/carica-deploy  
+    url: https://github.com/centaurin/carica-kestra
     flows: "*"
     targetNamespace: prod
     branch: kestra_dev
