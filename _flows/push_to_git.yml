@@ -11,5 +11,4 @@ tasks:
     username: kbnopro
     password: "{{ envs.github_token }}"
     gitDirectory: _flows
-    commitMessage: test flow
-    dryRun: false
+    commitMessage: "feat: update flow from production"
