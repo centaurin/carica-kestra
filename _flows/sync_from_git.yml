@@ -4,7 +4,7 @@ namespace: prod
 tasks:
   - id: git
     type: io.kestra.plugin.git.SyncFlows
-    url: https://github.com/centaurin/carica-deploy
+    url: https://github.com/centaurin/carica-kestra
     branch: main
     targetNamespace: prod
     username: kbnopro
