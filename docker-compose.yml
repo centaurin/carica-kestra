@@ -42,7 +42,7 @@ services:
     image: kestra/kestra:latest
     pull_policy: always
     env_file:
-    - .env_encoded
+    - ./config/kestra.env
     user: "root"
     command: server standalone
     networks: [proxy-kestra,kestra-psql]
