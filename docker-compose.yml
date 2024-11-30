@@ -41,6 +41,8 @@ services:
   kestra:
     image: kestra/kestra:latest
     pull_policy: always
+    env_file:
+    - ./config/kestra.env
     user: "root"
     command: server standalone
     networks: [proxy-kestra,kestra-psql]
@@ -57,9 +59,10 @@ services:
             username: kestra
             password: kestra
         kestra:
+          
           server:
             basicAuth:
-              enabled: false
+              enabled: true
               username: "$KESTRA_USERNAME" # it must be a valid email address
               password: $KESTRA_PASSWORD
           repository:
@@ -74,9 +77,6 @@ services:
             tmpDir:
               path: /tmp/kestra-wd/tmp
           url: ${DOMAIN_NAME}/kestra
-        micronaut:
-          server:
-            context-path: "/kestra"
     depends_on:
       postgres:
         condition: service_started

@@ -1,5 +1,6 @@
 # environment
 *.env
+*.env_encoded
 
 # ssl cert
 cert.pem
