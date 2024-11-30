@@ -1,5 +1,5 @@
 id: push_to_git
-namespace: git
+namespace: system
 
 tasks:
   - id: commit_and_push
@@ -9,7 +9,7 @@ tasks:
     branch: kestra_dev
     username: kbnopro
     sourceNamespace: system
-    targetNamespace: git
+    targetNamespace: system
     password: "{{ envs.github_token }}"
     gitDirectory: _flows
     commitMessage: test flow
