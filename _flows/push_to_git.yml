@@ -1,0 +1,16 @@
+id: push_to_git
+namespace: system
+
+tasks:
+  - id: commit_and_push
+    type: io.kestra.plugin.git.PushFlows
+    url: https://github.com/centaurin/carica-deploy  
+    flows: "*"
+    branch: kestra_dev
+    username: kbnopro
+    sourceNamespace: system
+    targetNamespace: system
+    password: "{{ envs.github_token }}"
+    gitDirectory: _flows
+    commitMessage: test flow
+    dryRun: false
