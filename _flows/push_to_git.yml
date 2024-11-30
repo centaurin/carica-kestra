@@ -12,5 +12,5 @@ tasks:
     targetNamespace: system
     password: "{{ envs.github_token }}"
     gitDirectory: _flows
-    commitMessage: test flow
+    commitMessage: "update flow from production"
     dryRun: false
