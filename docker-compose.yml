@@ -4,9 +4,28 @@ volumes:
   kestra-data:
     driver: local
 
+networks:
+  kestra-psql:
+    driver: bridge
+  proxy-kestra:
+    driver: bridge
+
 services:
+  haproxy:
+    image: haproxy:3.1.0-alpine
+    ports: 
+    - "${HTTP_BIND}:80"
+    - "${HTTPS_BIND}:443"
+    networks: [proxy-kestra]
+    volumes: 
+      - ./config/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg 
+      - ./config/cert.pem:/cert/cert.pem
+    env_file: ./config/haproxy.env
+
+
   postgres:
     image: postgres
+    networks: [kestra-psql]
     volumes:
       - postgres-data:/var/lib/postgresql/data
       - ./dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
@@ -24,6 +43,7 @@ services:
     pull_policy: always
     user: "root"
     command: server standalone
+    networks: [proxy-kestra,kestra-psql]
     volumes:
       - kestra-data:/app/storage
       - /var/run/docker.sock:/var/run/docker.sock
@@ -39,7 +59,7 @@ services:
         kestra:
           server:
             basicAuth:
-              enabled: true
+              enabled: false
               username: "$KESTRA_USERNAME" # it must be a valid email address
               password: $KESTRA_PASSWORD
           repository:
@@ -53,10 +73,10 @@ services:
           tasks:
             tmpDir:
               path: /tmp/kestra-wd/tmp
-          url: http://localhost:8080/
-    ports:
-      - "8080:8080"
-      - "8081:8081"
+          url: ${DOMAIN_NAME}/kestra
+        micronaut:
+          server:
+            context-path: "/kestra"
     depends_on:
       postgres:
         condition: service_started

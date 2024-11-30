@@ -1,2 +1,5 @@
 # environment
-.env
+*.env
+
+# ssl cert
+cert.pem
