@@ -1,0 +1,14 @@
+id: push_to_git
+namespace: prod
+
+tasks:
+  - id: commit_and_push
+    type: io.kestra.plugin.git.PushFlows
+    url: https://github.com/centaurin/carica-kestra
+    flows: "*"
+    targetNamespace: prod
+    branch: kestra_dev
+    username: kbnopro
+    password: "{{ envs.github_token }}"
+    gitDirectory: _flows
+    commitMessage: "feat: update flow from production"
