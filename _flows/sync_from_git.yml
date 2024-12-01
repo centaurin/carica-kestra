@@ -16,4 +16,4 @@ triggers:
     key: "{{ envs.webhook_key }}"
     conditions:
       - type: io.kestra.plugin.core.condition.ExpressionCondition
-        expression: "{{ trig.body.ref == 'refs/heads/main' }}"
+        expression: "{{ trigger.body.ref == 'refs/heads/main' }}"
