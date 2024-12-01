@@ -14,3 +14,6 @@ triggers:
   - id: github_webhook
     type: io.kestra.plugin.core.trigger.Webhook
     key: "{{ envs.webhook_key }}"
+    conditions:
+      - type: io.kestra.plugin.core.condition.ExpressionCondition
+        expression: "{{ trig.body.ref = 'refs/heads/main' }}"
