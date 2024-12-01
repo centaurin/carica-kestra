@@ -12,3 +12,4 @@ tasks:
     password: "{{ envs.github_token }}"
     gitDirectory: _flows
     commitMessage: "feat: update flow from production"
+    dryRun: false
