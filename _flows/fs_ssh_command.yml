@@ -1,0 +1,17 @@
+id: fs_ssh_command
+namespace: prod
+
+tasks:
+  - id: command
+    type: io.kestra.plugin.fs.ssh.Command
+    host: 128.199.192.205
+    port: "22"
+    authMethod: PUBLIC_KEY
+    username: carica
+    privateKey: "{{ envs.private_key }}"
+    commands: ['cd carica-deploy','./update.sh']
+
+triggers: 
+  - id: webhook
+    type: io.kestra.plugin.core.trigger.Webhook
+    key: "{{ envs.webhook_key }}"
