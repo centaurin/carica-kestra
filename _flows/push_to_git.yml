@@ -7,7 +7,7 @@ tasks:
     url: https://github.com/centaurin/carica-kestra
     flows: "*"
     targetNamespace: prod
-    branch: main
+    branch: kestra_dev
     username: kbnopro
     password: "{{ envs.github_token }}"
     gitDirectory: _flows
