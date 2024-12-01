@@ -9,6 +9,7 @@ tasks:
     targetNamespace: prod
     username: kbnopro
     password: "{{ envs.github_token }}"
+    dryRun: true
 
 triggers:
   - id: github_webhook
