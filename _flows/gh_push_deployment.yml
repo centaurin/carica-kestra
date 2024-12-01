@@ -1,4 +1,4 @@
-id: gh_workflow_completed
+id: gh_push_deployment
 namespace: prod
 
 concurrency:
@@ -21,4 +21,4 @@ triggers:
     key: "{{ envs.webhook_key }}"
     conditions:
       - type: io.kestra.plugin.core.condition.ExpressionCondition
-        expression: "{{ trigger.body.action == 'completed' }}"
+        expression: "{{ trigger.body.ref == 'refs/heads/main' }}"
